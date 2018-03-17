@@ -1,0 +1,29 @@
+html {
+  background: #f8f8f8;
+}
+
+.header {
+  left: 0px;
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  border-bottom: 1px solid #eaeaea;
+  background: #fff;
+  z-index: 1;
+}
+
+.searchBarContainer {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appContainer {
+  padding-top: 122px;
+}
+
+.appSearchInput {
+  flex: 1;
+}
+
