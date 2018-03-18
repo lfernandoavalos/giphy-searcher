@@ -1,7 +1,9 @@
 import request from './request.api';
 
 export default {
-  fetchTrending: () => request.get('/trending'),
+  fetchTrending: (offset: Number) => request.get('/trending', {
+    offset,
+  }),
   search: (qStr: String, offset: Number) => request.get('/search', {
     // eslint-disable-next-line
     q: qStr,

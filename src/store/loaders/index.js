@@ -1,3 +1,7 @@
+/**
+ * https://github.com/kouhin/redux-dataloader
+ * Aysnc use redux-dataloader
+ */
 import { createLoader, fixedWait } from 'redux-dataloader';
 
 import { HTTP_REQUEST } from './../../redux/generic.types';

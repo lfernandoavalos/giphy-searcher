@@ -8,7 +8,7 @@ import { CacheStorage } from './../../../common/utils/storage';
 
 import {
   FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING,
-  CLEAR_SEARCH_TERM_SUCCESS,
+  CLEAR_SEARCH_TERM_SUCCESS, FETCH_GIFS_APPEND_SUCCESS,
 } from './search.types';
 
 const fetchSearchSuccess = (results, searchTerm) => ({
@@ -27,12 +27,23 @@ const loading = () => ({
   type: FETCH_GIFS_LOADING,
 });
 
-const fetchTrending = () =>
+const fetchSearchAppendSuccess = results => ({
+  type: FETCH_GIFS_APPEND_SUCCESS,
+  payload: {
+    results,
+  },
+});
+
+const fetchTrending = (offset: Number = 0) =>
   load({
     type: HTTP_REQUEST,
-    fetch: () => GiphyAPI.fetchTrending(),
+    fetch: () => GiphyAPI.fetchTrending(offset),
     success: (results, context) => {
       context.dispatch(clearSearchTerm());
+      if (offset) {
+        return fetchSearchAppendSuccess(results);
+      }
+
       return fetchSearchSuccess(results);
     },
     loading: () => loading(),
@@ -59,6 +70,10 @@ const searchGiphy = (searchTerm: String, offset: Number = 0) =>
       } else if (offset) {
         const cachedResults = CacheStorage.getItem(searchTerm);
         cachedResults.results = [cachedResults.results, ...results];
+      }
+
+      if (offset) {
+        return fetchSearchAppendSuccess(results);
       }
 
       return fetchSearchSuccess(results, searchTerm);
