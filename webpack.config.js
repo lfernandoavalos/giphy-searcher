@@ -29,20 +29,34 @@ const commonConfig = merge(
         template: './src/index.html',
         filename: './index.html',
       }),
+      new webpack.DefinePlugin({
+        __GIPHY_API_KEY__: JSON.stringify(process.env.GIPHY_API_KEY),
+        'process.env': {
+          NODE_ENV: JSON.stringify('development'),
+        },
+      }),
     ],
   },
 );
 
 // Additional config for production env
 const prodConfig = merge({
-
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+  ],
 });
 
 // Additional config for dev env
 const devConfig = merge({
   plugins: [
     new webpack.DefinePlugin({
-      __GIPHY_API_KEY__: JSON.stringify(process.env.GIPHY_API_KEY),
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+      },
     }),
   ],
 });
