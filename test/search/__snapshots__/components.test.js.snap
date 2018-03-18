@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders gif results correclty 1`] = `
+<div>
+  <div
+    className="result"
+  >
+    <div
+      className=""
+      data-react-toolbox="card"
+    >
+      <div
+        className=""
+      >
+        <div
+          className=""
+          data-react-toolbox="avatar"
+        >
+          <img
+            alt=""
+            className={undefined}
+            src="https://media.giphy.com/avatars/msnbc/kaVAvQ8Xdzvx.jpg"
+          />
+        </div>
+        <div>
+          <h5
+            className={undefined}
+          >
+            msnbc
+          </h5>
+          <p
+            className={undefined}
+          >
+            Twitter: @MSNBC
+          </p>
+        </div>
+      </div>
+      <div
+        className="undefined"
+        style={
+          Object {
+            "backgroundColor": undefined,
+            "backgroundImage": "url('https://media0.giphy.com/media/fx86vKE0pXj1qkpKZF/giphy.gif')",
+          }
+        }
+      >
+        <div
+          className=""
+        />
+      </div>
+      <div
+        className="undefined"
+      >
+        <div>
+          <h5
+            className={undefined}
+          >
+            chris matthews lol GIF by MSNBC
+          </h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders gif with user result correclty 1`] = `
+<div
+  className="result"
+>
+  <div
+    className=""
+    data-react-toolbox="card"
+  >
+    <div
+      className=""
+    >
+      <div
+        className=""
+        data-react-toolbox="avatar"
+      >
+        <img
+          alt=""
+          className={undefined}
+          src="https://media.giphy.com/avatars/msnbc/kaVAvQ8Xdzvx.jpg"
+        />
+      </div>
+      <div>
+        <h5
+          className={undefined}
+        >
+          msnbc
+        </h5>
+        <p
+          className={undefined}
+        >
+          Twitter: @MSNBC
+        </p>
+      </div>
+    </div>
+    <div
+      className="undefined"
+      style={
+        Object {
+          "backgroundColor": undefined,
+          "backgroundImage": "url('https://media0.giphy.com/media/fx86vKE0pXj1qkpKZF/giphy.gif')",
+        }
+      }
+    >
+      <div
+        className=""
+      />
+    </div>
+    <div
+      className="undefined"
+    >
+      <div>
+        <h5
+          className={undefined}
+        >
+          chris matthews lol GIF by MSNBC
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`renders gif without user result correclty 1`] = `
+<div
+  className="result"
+>
+  <div
+    className=""
+    data-react-toolbox="card"
+  >
+    <div
+      className=""
+    >
+      <div
+        className=""
+        data-react-toolbox="avatar"
+      >
+        <img
+          alt=""
+          className={undefined}
+          src="#"
+        />
+      </div>
+      <div>
+        <h5
+          className={undefined}
+        >
+          Anonymous
+        </h5>
+        <p
+          className={undefined}
+        >
+          Twitter: anonymous
+        </p>
+      </div>
+    </div>
+    <div
+      className="undefined"
+      style={
+        Object {
+          "backgroundColor": undefined,
+          "backgroundImage": "url('https://i.giphy.com/media/Dz62ImmWRzAkw/giphy.gif')",
+        }
+      }
+    >
+      <div
+        className=""
+      />
+    </div>
+    <div
+      className="undefined"
+    >
+      <div>
+        <h5
+          className={undefined}
+        >
+          family guy quagmire GIF
+        </h5>
+      </div>
+    </div>
+  </div>
+</div>
+`;
