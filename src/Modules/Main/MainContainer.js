@@ -6,7 +6,8 @@ import { Grid, Row, Col } from 'react-flexbox-grid';
 
 import { fetchTrending } from './redux/search.actions';
 
-import RecentResultsContainer from './RecentResults/RecentResultsContainer';
+// Sidebar for recent searches + quick links
+import SidebarMenu from './Sidebar/SidebarMenu';
 import Results from './Results/Results';
 
 import styles from './styles.css';
@@ -14,6 +15,14 @@ import styles from './styles.css';
 class MainContainer extends Component {
   componentDidMount() {
     this.props.fetchTrending();
+  }
+
+  onClickRecentSearchResults = () => {
+    this.props.fetchTrending();
+  }
+
+  onClickTrending = (event) => {
+    console.log(event);
   }
 
   render() {
@@ -28,7 +37,19 @@ class MainContainer extends Component {
                 /> : 'Loading'}
             </Col>
             <Col lg={4}>
-              <RecentResultsContainer />
+              <div className={styles.sidebar}>
+                <SidebarMenu
+                  title="Quick Links"
+                  items={[
+                    {
+                      caption: 'Trending',
+                      legend: 'Powered by Giphy',
+                      leftIcon: 'trending_up',
+                    },
+                  ]}
+                  onClick={this.onClickRecentSearchResults}
+                />
+              </div>
             </Col>
           </Row>
         </Grid>

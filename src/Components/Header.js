@@ -39,6 +39,14 @@ class Header extends Component {
     searchTerm: '',
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.resetSearchTerm) {
+      this.setState({
+        searchTerm: '',
+      });
+    }
+  }
+
   onChangeSearchTerm = searchTerm => this.setState({ searchTerm });
 
   render() {
@@ -65,4 +73,16 @@ class Header extends Component {
   }
 }
 
-export default connect()(Header);
+Header.defaultProps = {
+  resetSearchTerm: false,
+};
+
+Header.propTypes = {
+  resetSearchTerm: PropTypes.bool,
+};
+
+const mapStateToProps = state => ({
+  resetSearchTerm: state.searchReducer.resetSearchTerm,
+});
+
+export default connect(mapStateToProps)(Header);

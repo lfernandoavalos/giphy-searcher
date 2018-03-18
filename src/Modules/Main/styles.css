@@ -1,8 +1,8 @@
-.recentResultsContainer {
+.sidebar {
   position: sticky;
   top: 122px;
 }
 
-.restul {
+.result {
   margin-bottom: 48px;
 }

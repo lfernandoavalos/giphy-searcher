@@ -9,7 +9,7 @@ import styles from './../styles.css';
 const getPreviewUrl = url => url.replace('media2', 'i');
 
 const Result = ({ title, user, images }) => (
-  <div className={styles.restul}>
+  <div className={styles.result}>
     <Card raised={false}>
       <CardTitle
         avatar={user.avatar_url}

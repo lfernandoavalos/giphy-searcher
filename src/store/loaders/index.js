@@ -6,7 +6,7 @@ const loader = createLoader(HTTP_REQUEST, {
   /*
    * (required) Handle fetched data, return a success action
    */
-  success: (context, result) => context.action.success(result),
+  success: (context, result) => context.action.success(result, context),
   /*
    * (required) Handle error, return a failure action
    */

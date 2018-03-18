@@ -4,13 +4,17 @@ import { HTTP_REQUEST } from './../../../redux/generic.types';
 
 import GiphyAPI from './../../../common/api/giphy.api';
 
-import { FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING } from './search.types';
+import { FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING, CLEAR_SEARCH_TERM_SUCCESS } from './search.types';
 
 const fetchSuccess = results => ({
   type: FETCH_GIFS_SUCCESS,
   payload: {
     results,
   },
+});
+
+const clearSearchTerm = () => ({
+  type: CLEAR_SEARCH_TERM_SUCCESS,
 });
 
 const loading = () => ({
@@ -21,7 +25,10 @@ export const fetchTrending = () =>
   load({
     type: HTTP_REQUEST,
     fetch: () => GiphyAPI.fetchTrending(),
-    success: results => fetchSuccess(results),
+    success: (results, context) => {
+      context.dispatch(clearSearchTerm());
+      return fetchSuccess(results);
+    },
     loading: () => loading(),
   });
 
