@@ -46,7 +46,6 @@ const prodConfig = merge({
         NODE_ENV: JSON.stringify('production'),
       },
     }),
-    new BundleAnalyzerPlugin(),
   ],
 });
 
