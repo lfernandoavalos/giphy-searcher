@@ -10,6 +10,7 @@
   },
   "scripts": {
     "start": "cp server.js ./dist; node ./dist/server.js",
+    "postinstall": "npm run build",
     "start-dev": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env.development --mode development\"",
     "lint:js": "eslint ./src ./test --fix",
     "build": "webpack --optimize-minimize --mode production --env.production",
