@@ -71,15 +71,31 @@ class MainContainer extends Component {
   }
 
   render() {
+    let results = null;
+
+    if (this.props.results.length && !this.props.error) {
+      results = <Results results={this.props.results} />;
+    } else if (this.props.searchAsyncInProgress) {
+      results = <ContentCenter text="Loading" />;
+    } else {
+      results = <ContentCenter text="We couldn't find any results :(" />;
+    }
+
     return (
       <div className={styles.mainContainer}>
         <Grid>
           <Row>
             <Col lgOffset={2} lg={6}>
-              { this.props.results.length ?
-                <Results
-                  results={this.props.results}
-                /> : <ContentCenter text="Loading" />}
+              { this.props.error ?
+                <div className={styles.contentCenter}>
+                  <img
+                    alt="Funny error gif"
+                    src="https://media1.giphy.com/media/l0HlToB2cTLfq9aJW/giphy.gif"
+                  />
+                  <ContentCenter text="We've reached out to the dev how built this, there was an error." />
+                </div> : null
+              }
+              { results }
               { this.props.searchAsyncInProgress && this.props.results.length ?
                 <ContentCenter text="Loading Next Page :)" /> : null}
             </Col>
@@ -135,6 +151,7 @@ MainContainer.propTypes = {
   offset: PropTypes.number.isRequired,
   searchTerm: PropTypes.string.isRequired,
   searchGiphy: PropTypes.func.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -142,6 +159,7 @@ const mapStateToProps = state => ({
   results: state.searchReducer.results,
   searchTerm: state.searchReducer.searchTerm,
   offset: state.searchReducer.offset,
+  error: state.searchReducer.error,
 });
 
 const mapDispatchToProps = {

@@ -14,7 +14,7 @@ const loader = createLoader(HTTP_REQUEST, {
   /*
    * (required) Handle error, return a failure action
    */
-  error: (context, error) => context.action.error(error),
+  error: context => context.action.error(),
   /*
    * (optional) By default, original request action will be dispatched.
    */

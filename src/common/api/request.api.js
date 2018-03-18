@@ -16,7 +16,7 @@ const get = (url, queryData = {}) => {
     return `${qStr}&${field}=${value}`;
   }, '');
   // eslint-disable-next-line
-  const queryString = `?api_key=${__GIPHY_API_KEY__}${strQueryString}`;
+  const queryString = `?api_key=${__GIPHY_API_KEY__ || ''}${strQueryString}`;
   return instance.get(cleanURL(url) + queryString).then(res => res.data.data);
 };
 

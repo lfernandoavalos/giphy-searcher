@@ -1,6 +1,6 @@
 import {
   FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING, CLEAR_SEARCH_TERM_SUCCESS,
-  FETCH_GIFS_APPEND_SUCCESS,
+  FETCH_GIFS_APPEND_SUCCESS, FETCH_GIFS_FAILURE,
 } from './search.types';
 
 export const initialState = {
@@ -9,6 +9,7 @@ export const initialState = {
   results: [],
   searchTerm: '',
   offset: 0,
+  error: false,
 };
 
 export default (state = initialState, action) => {
@@ -25,6 +26,7 @@ export default (state = initialState, action) => {
       resetSearchTerm: false,
       searchTerm: action.payload.searchTerm,
       offset: 25,
+      error: false,
     };
   case FETCH_GIFS_APPEND_SUCCESS:
     return {
@@ -32,6 +34,13 @@ export default (state = initialState, action) => {
       results: [...state.results, ...action.payload.results],
       offset: state.offset + 25,
       searchAsyncInProgress: false,
+      error: false,
+    };
+  case FETCH_GIFS_FAILURE:
+    return {
+      ...state,
+      searchAsyncInProgress: false,
+      error: true,
     };
   case FETCH_GIFS_LOADING:
     return {

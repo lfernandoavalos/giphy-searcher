@@ -9,6 +9,7 @@ import { CacheStorage } from './../../../common/utils/storage';
 import {
   FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING,
   CLEAR_SEARCH_TERM_SUCCESS, FETCH_GIFS_APPEND_SUCCESS,
+  FETCH_GIFS_FAILURE,
 } from './search.types';
 
 const fetchSearchSuccess = (results, searchTerm) => ({
@@ -34,6 +35,10 @@ const fetchSearchAppendSuccess = results => ({
   },
 });
 
+const fetchSearchFailure = () => ({
+  type: FETCH_GIFS_FAILURE,
+});
+
 const fetchTrending = (offset: Number = 0) =>
   load({
     type: HTTP_REQUEST,
@@ -47,6 +52,7 @@ const fetchTrending = (offset: Number = 0) =>
       return fetchSearchSuccess(results);
     },
     loading: () => loading(),
+    error: () => fetchSearchFailure(),
   });
 
 const searchGiphy = (searchTerm: String, offset: Number = 0) =>
