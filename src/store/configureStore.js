@@ -3,6 +3,7 @@ import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { createDataLoaderMiddleware } from 'redux-dataloader';
 
 import loaders from './loaders';
+import logging from './middleware/logging';
 
 // Reducers to include
 import searchReducer from './../Modules/Main/redux/search.reducer';
@@ -28,7 +29,13 @@ export const registerReducer = (store, name, reducer) => {
 };
 
 export default (() => {
-  const store = createStore(createReducer(), applyMiddleware(dataLoaderMiddleware));
+  const middleware = [dataLoaderMiddleware];
+
+  if (process.env.NODE_ENV === 'development') {
+    middleware.push(logging);
+  }
+
+  const store = createStore(createReducer(), applyMiddleware(...middleware));
   store.async = {};
 
   // Register our init reducer
