@@ -9,7 +9,7 @@ import AppBar from 'react-toolbox/lib/app_bar';
 import Input from 'react-toolbox/lib/input';
 
 // Redux actions
-import { searchGiphy } from './../Modules/Main/redux/search.actions';
+import { searchGiphy, fetchTrending } from './../Modules/Main/redux/search.actions';
 import { KEY_PRESS_EVENTS } from './../common/utils/constants';
 
 // Override React-toolbox themes
@@ -54,7 +54,11 @@ class Header extends Component {
 
   onKeyPress = (event) => {
     if (event.charCode === KEY_PRESS_EVENTS.KEY_CODE_ENTER) {
-      this.props.searchGiphy(this.state.searchTerm);
+      if (!this.state.searchTerm) {
+        this.props.fetchTrending();
+      } else {
+        this.props.searchGiphy(this.state.searchTerm);
+      }
     }
   }
 
@@ -90,6 +94,7 @@ Header.defaultProps = {
 Header.propTypes = {
   resetSearchTerm: PropTypes.bool,
   searchGiphy: PropTypes.func.isRequired,
+  fetchTrending: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -98,6 +103,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   searchGiphy,
+  fetchTrending,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);
