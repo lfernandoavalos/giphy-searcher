@@ -3,11 +3,17 @@
   "version": "1.0.0",
   "description": "ReactJS powered GIF Searcher",
   "main": "index.js",
+  "jest": {
+    "moduleNameMapper": {
+      "\\.(css|less)$": "identity-obj-proxy"
+    }
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env.development --mode development\"",
-    "lint:js": "eslint ./src --fix",
-    "build": "webpack --mode production"
+    "lint:js": "eslint ./src ./test --fix",
+    "build": "webpack --mode production",
+    "test": "jest",
+    "test:watch": "npm test ./test -- --watch"
   },
   "repository": {
     "type": "git",
@@ -38,6 +44,7 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.2.2",
+    "babel-jest": "^23.0.0-alpha.0",
     "babel-loader": "^7.1.4",
     "babel-plugin-syntax-dynamic-import": "^6.18.0",
     "babel-plugin-transform-class-properties": "^6.24.1",
@@ -51,13 +58,19 @@
     "eslint-plugin-import": "^2.9.0",
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.7.0",
+    "expect": "^23.0.0-alpha.0",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.0.6",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.4.2",
+    "moxios": "^0.4.0",
     "nodemon": "^1.17.2",
     "postcss-cssnext": "^3.1.0",
     "postcss-extend": "^1.0.5",
     "postcss-loader": "^2.1.1",
+    "react-test-renderer": "^16.2.0",
     "react-toolbox-themr": "^1.0.2",
+    "redux-mock-store": "^1.5.1",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12",
