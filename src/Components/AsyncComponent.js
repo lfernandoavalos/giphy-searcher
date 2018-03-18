@@ -17,7 +17,7 @@ class AsyncComponent extends Component {
   render() {
     const { LoadedComponent } = this.state;
 
-    return LoadedComponent ? <LoadedComponent /> : 'Loading';
+    return LoadedComponent ? <LoadedComponent /> : null;
   }
 }
 

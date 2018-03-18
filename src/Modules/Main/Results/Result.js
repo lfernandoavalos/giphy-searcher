@@ -8,37 +8,43 @@ import styles from './../styles.css';
 
 const getPreviewUrl = url => url.replace('media2', 'i');
 
-const Result = ({ result }) => (
+const Result = ({ title, user, images }) => (
   <div className={styles.restul}>
-    <Card>
+    <Card raised={false}>
       <CardTitle
-        avatar={result.user.avatar_url}
-        title={result.user.username}
-        subtitle={`Twitter: ${result.user.twitter}`}
+        avatar={user.avatar_url}
+        title={user.username}
+        subtitle={`Twitter: ${user.twitter}`}
       />
       <CardMedia
         aspectRatio="wide"
-        image={getPreviewUrl(result.images.original.url)}
+        image={getPreviewUrl(images.original.url)}
       />
       <CardTitle
-        title={result.title}
+        title={title}
       />
     </Card>
   </div>
 );
 
+Result.defaultProps = {
+  user: {
+    username: 'Anonymous',
+    avatar_url: '#',
+    twitter: 'anonymous',
+  },
+};
 
 Result.propTypes = {
-  result: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    user: PropTypes.shape({
-      avatar_url: PropTypes.string.isRequired,
-      twitter: PropTypes.string.isRequired,
-    }).isRequired,
-    images: PropTypes.shape({
-      original: PropTypes.shape({
-        url: PropTypes.string.isRequired,
-      }),
+  title: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    username: PropTypes.string.isRequired,
+    avatar_url: PropTypes.string.isRequired,
+    twitter: PropTypes.string.isRequired,
+  }),
+  images: PropTypes.shape({
+    original: PropTypes.shape({
+      url: PropTypes.string.isRequired,
     }),
   }).isRequired,
 };

@@ -6,7 +6,7 @@ import Result from './Result';
 const Results = ({ results }) => (
   <div>
     {results.map(result => (
-      <Result key={result.id} result={result} />
+      <Result key={result.id} {...result} />
     ))}
   </div>
 );
@@ -15,9 +15,10 @@ Results.propTypes = {
   results: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
     user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
       avatar_url: PropTypes.string.isRequired,
       twitter: PropTypes.string.isRequired,
-    }).isRequired,
+    }),
     images: PropTypes.shape({
       original: PropTypes.shape({
         url: PropTypes.string.isRequired,

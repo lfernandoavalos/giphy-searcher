@@ -6,7 +6,8 @@ import { Layout } from 'react-toolbox';
 
 // General use giphy components
 import AsyncComponent from './Components/AsyncComponent';
-import { Header, AppContainer } from './Components/Layout';
+import AppContainer from './Components/Layout';
+import Header from './Components/Header';
 
 // Dynamic imported routes components
 const main = () => import(/* webpackChunkName: "app" */ './Modules/Main/MainContainer.js');

@@ -1,0 +1,3 @@
+export const HTTP_REQUEST = 'GIPHY/GENERIC/HTTP_REQUEST/REQUEST';
+
+export default HTTP_REQUEST;
