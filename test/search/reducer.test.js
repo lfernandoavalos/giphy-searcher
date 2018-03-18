@@ -27,7 +27,7 @@ describe('search reducer', () => {
     expect(reducer(initialState, action)).toEqual({
       ...initialState,
       results: TRENDING,
-      offset: 25,
+      offset: 26,
       searchAsyncInProgress: false,
       searchTerm: undefined,
     });
@@ -52,7 +52,7 @@ describe('search reducer', () => {
     expect(reducer(state, action)).toEqual({
       ...initialState,
       results: [...TRENDING, ...TRENDING],
-      offset: 50,
+      offset: 51,
       searchAsyncInProgress: false,
       searchTerm: 'Searching',
     });
