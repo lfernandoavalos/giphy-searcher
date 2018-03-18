@@ -11,7 +11,7 @@
   "scripts": {
     "start": "nodemon --watch webpack.config.js --exec \"webpack-dev-server --env.development --mode development\"",
     "lint:js": "eslint ./src ./test --fix",
-    "build": "webpack --mode production",
+    "build": "webpack --optimize-minimize --mode production --env.production",
     "test": "jest",
     "test:watch": "npm test ./test -- --watch"
   },
@@ -73,6 +73,7 @@
     "redux-mock-store": "^1.5.1",
     "style-loader": "^0.20.3",
     "webpack": "^4.1.1",
+    "webpack-bundle-analyzer": "^2.11.1",
     "webpack-cli": "^2.0.12",
     "webpack-dev-server": "^3.1.1",
     "webpack-merge": "^4.1.2"

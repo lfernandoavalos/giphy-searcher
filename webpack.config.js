@@ -1,5 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 const merge = require('webpack-merge');
 
 const parts = require('./webpack.parts');
@@ -31,9 +33,6 @@ const commonConfig = merge(
       }),
       new webpack.DefinePlugin({
         __GIPHY_API_KEY__: JSON.stringify(process.env.GIPHY_API_KEY),
-        'process.env': {
-          NODE_ENV: JSON.stringify('development'),
-        },
       }),
     ],
   },
@@ -47,6 +46,7 @@ const prodConfig = merge({
         NODE_ENV: JSON.stringify('production'),
       },
     }),
+    new BundleAnalyzerPlugin(),
   ],
 });
 

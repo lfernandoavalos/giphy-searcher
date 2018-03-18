@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router';
 
 // React-toolbox components
-import { Layout } from 'react-toolbox';
+import { Layout } from 'react-toolbox/lib/layout';
 
 // General use giphy components
 import AsyncComponent from './Components/AsyncComponent';
