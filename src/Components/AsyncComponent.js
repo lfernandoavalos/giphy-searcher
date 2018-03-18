@@ -10,6 +10,8 @@ class AsyncComponent extends Component {
     if (!this.state.Component) {
       this.props.moduleProvider().then((component) => {
         this.setState({ LoadedComponent: component.default });
+      }).catch(() => {
+        // Render error component
       });
     }
   }

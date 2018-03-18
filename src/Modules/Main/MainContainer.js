@@ -18,12 +18,10 @@ class MainContainer extends Component {
   }
 
   onClickRecentSearchResults = () => {
-    this.props.fetchTrending();
+
   }
 
-  onClickTrending = (event) => {
-    console.log(event);
-  }
+  onClickTrending = () => this.props.fetchTrending();
 
   render() {
     return (
@@ -45,6 +43,17 @@ class MainContainer extends Component {
                       caption: 'Trending',
                       legend: 'Powered by Giphy',
                       leftIcon: 'trending_up',
+                    },
+                  ]}
+                  onClick={this.onClickTrending}
+                />
+                <SidebarMenu
+                  title="Recent Search Results"
+                  items={[
+                    {
+                      caption: 'Some recent result',
+                      legend: 'Lorem ipsum dolor sit amet',
+                      leftIcon: 'search',
                     },
                   ]}
                   onClick={this.onClickRecentSearchResults}

@@ -4,10 +4,20 @@ import { HTTP_REQUEST } from './../../../redux/generic.types';
 
 import GiphyAPI from './../../../common/api/giphy.api';
 
-import { FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING, CLEAR_SEARCH_TERM_SUCCESS } from './search.types';
+import {
+  FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING,
+  CLEAR_SEARCH_TERM_SUCCESS, FETCH_TRENDING_SUCCESS
+} from './search.types';
 
-const fetchSuccess = results => ({
+const fetchSearchSuccess = results => ({
   type: FETCH_GIFS_SUCCESS,
+  payload: {
+    results,
+  },
+});
+
+const fetchTrendingSuccess = results => ({
+  type: FETCH_TRENDING_SUCCESS,
   payload: {
     results,
   },
@@ -21,20 +31,28 @@ const loading = () => ({
   type: FETCH_GIFS_LOADING,
 });
 
-export const fetchTrending = () =>
+const fetchTrending = () =>
   load({
     type: HTTP_REQUEST,
     fetch: () => GiphyAPI.fetchTrending(),
     success: (results, context) => {
       context.dispatch(clearSearchTerm());
-      return fetchSuccess(results);
+      return fetchTrendingSuccess(results);
     },
     loading: () => loading(),
   });
 
-// const search = (searchTerm: String, start: Number, offset: Number) =>
-// console.log('Fetching From Search');
+const searchGiphy = (searchTerm: String, offset: Number = 0) =>
+  load({
+    type: HTTP_REQUEST,
+    fetch: () => GiphyAPI.search(searchTerm, offset),
+    success: results => fetchSearchSuccess(results),
+    loading: () => loading()
+  });
 
 // const getFromCatch = () => console.log('Fetching from cache');
 
-export default fetchTrending;
+export {
+  searchGiphy,
+  fetchTrending,
+};

@@ -5,9 +5,11 @@ import Result from './Result';
 
 const Results = ({ results }) => (
   <div>
-    {results.map(result => (
-      <Result key={result.id} {...result} />
-    ))}
+    {results.length ?
+      results.map(result => (
+        <Result key={result.id} {...result} />
+      ))
+      : 'Oh Snap! No results found :('}
   </div>
 );
 

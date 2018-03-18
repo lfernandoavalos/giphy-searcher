@@ -9,7 +9,8 @@ import AppBar from 'react-toolbox/lib/app_bar';
 import Input from 'react-toolbox/lib/input';
 
 // Redux actions
-// import { fetchTrending } from './../Modules/Main/redux/search.actions';
+import { searchGiphy } from './../Modules/Main/redux/search.actions';
+import { KEY_PRESS_EVENTS } from './../common/utils/constants';
 
 // Override React-toolbox themes
 import appBarTheme from './themes/appBar.css';
@@ -17,7 +18,7 @@ import appBarTheme from './themes/appBar.css';
 // Component styles
 import styles from './styles.css';
 
-const SearchBar = ({ onChange, searchTerm }) => (
+const SearchBar = ({ onChange, searchTerm, onKeyPress }) => (
   <div className={styles.searchBarContainer}>
     <Input
       icon="search"
@@ -25,6 +26,7 @@ const SearchBar = ({ onChange, searchTerm }) => (
       hint="Search for GIF"
       value={searchTerm}
       onChange={onChange}
+      onKeyPress={onKeyPress}
     />
   </div>
 );
@@ -32,6 +34,7 @@ const SearchBar = ({ onChange, searchTerm }) => (
 SearchBar.propTypes = {
   onChange: PropTypes.func.isRequired,
   searchTerm: PropTypes.string.isRequired,
+  onKeyPress: PropTypes.func.isRequired,
 };
 
 class Header extends Component {
@@ -49,6 +52,12 @@ class Header extends Component {
 
   onChangeSearchTerm = searchTerm => this.setState({ searchTerm });
 
+  onKeyPress = (event) => {
+    if (event.charCode === KEY_PRESS_EVENTS.KEY_CODE_ENTER) {
+      this.props.searchGiphy(this.state.searchTerm);
+    }
+  }
+
   render() {
     return (
       <div className={styles.header}>
@@ -58,6 +67,7 @@ class Header extends Component {
               <AppBar
                 title={
                   <SearchBar
+                    onKeyPress={this.onKeyPress}
                     searchTerm={this.state.searchTerm}
                     onChange={this.onChangeSearchTerm}
                   />
@@ -79,10 +89,15 @@ Header.defaultProps = {
 
 Header.propTypes = {
   resetSearchTerm: PropTypes.bool,
+  searchGiphy: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   resetSearchTerm: state.searchReducer.resetSearchTerm,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = {
+  searchGiphy,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
