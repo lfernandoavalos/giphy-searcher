@@ -83,7 +83,7 @@ class MainContainer extends Component {
               { this.props.searchAsyncInProgress && this.props.results.length ?
                 <ContentCenter text="Loading Next Page :)" /> : null}
             </Col>
-            <Col lg={4}>
+            <Col className={styles.hiddenMd} lg={4}>
               <div className={styles.sidebar}>
                 <SidebarMenu
                   title="Quick Links"
