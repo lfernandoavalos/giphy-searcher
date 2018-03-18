@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 
-import { fetchTrending } from './redux/search.actions';
+import { CacheStorage } from './../../common/utils/storage';
+
+import { fetchTrending, fetchFromCache } from './redux/search.actions';
 
 // Sidebar for recent searches + quick links
 import SidebarMenu from './Sidebar/SidebarMenu';
@@ -13,12 +15,25 @@ import Results from './Results/Results';
 import styles from './styles.css';
 
 class MainContainer extends Component {
+  state = {
+    cachedResults: [],
+  };
+
   componentDidMount() {
     this.props.fetchTrending();
   }
 
-  onClickRecentSearchResults = () => {
+  componentWillReceiveProps() {
+    const cachedResults = [];
+    CacheStorage.toArray().forEach((cachedResult) => {
+      cachedResults.push(cachedResult.description);
+    });
+    this.setState({ cachedResults });
+  }
 
+
+  onClickRecentSearchResults = (caption: String) => {
+    this.props.fetchFromCache(caption);
   }
 
   onClickTrending = () => this.props.fetchTrending();
@@ -47,17 +62,12 @@ class MainContainer extends Component {
                   ]}
                   onClick={this.onClickTrending}
                 />
-                <SidebarMenu
-                  title="Recent Search Results"
-                  items={[
-                    {
-                      caption: 'Some recent result',
-                      legend: 'Lorem ipsum dolor sit amet',
-                      leftIcon: 'search',
-                    },
-                  ]}
-                  onClick={this.onClickRecentSearchResults}
-                />
+                { this.state.cachedResults.length ?
+                  <SidebarMenu
+                    title="Recent Search Results"
+                    items={this.state.cachedResults}
+                    onClick={this.onClickRecentSearchResults}
+                  /> : null}
               </div>
             </Col>
           </Row>
@@ -83,15 +93,18 @@ MainContainer.propTypes = {
       }),
     }),
   })).isRequired,
+  fetchFromCache: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   searchAsyncInProgress: state.searchReducer.searchAsyncInProgress,
   results: state.searchReducer.results,
+  searchTerm: state.searchReducer.searchTerm,
 });
 
 const mapDispatchToProps = {
   fetchTrending,
+  fetchFromCache,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

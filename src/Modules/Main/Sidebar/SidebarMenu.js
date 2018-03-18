@@ -17,7 +17,7 @@ const SidebarMenu = ({ title, items, onClick }) => (
           caption={item.caption}
           legend={item.legend}
           leftIcon={item.leftIcon}
-          onClick={onClick}
+          onClick={() => onClick(item.caption)}
         />
       ))}
     </List>

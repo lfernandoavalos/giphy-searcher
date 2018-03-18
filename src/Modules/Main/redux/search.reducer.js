@@ -1,7 +1,4 @@
-import {
-  FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING, CLEAR_SEARCH_TERM_SUCCESS,
-  FETCH_TRENDING_SUCCESS,
-} from './search.types';
+import { FETCH_GIFS_SUCCESS, FETCH_GIFS_LOADING, CLEAR_SEARCH_TERM_SUCCESS } from './search.types';
 
 export const initialState = {
   resetSearchTerm: false,
@@ -15,13 +12,6 @@ export default (state = initialState, action) => {
   }
 
   switch (action.type) {
-  case FETCH_TRENDING_SUCCESS:
-    return {
-      ...state,
-      searchAsyncInProgress: false,
-      results: action.payload.results,
-      resetSearchTerm: false,
-    };
   case FETCH_GIFS_SUCCESS:
     return {
       ...state,
