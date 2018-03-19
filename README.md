@@ -63,7 +63,7 @@ Run the following command to run in development mode locally
 
 ```
 npm install # Make sure you have project dependencies installed
-GIPHY_API_KEY=[YOUR PRODUCTION KEY] npm start
+GIPHY_API_KEY=[YOUR PRODUCTION KEY] npm run start-dev
 ```
 
 This will start your webpack-dev-server which will do hot-reload whenever any changes are made to your files. This repo follows [airbnb-eslint](https://www.npmjs.com/package/eslint-config-airbnb) style guide and will trigger a pre-commit hook which will lint project and alert for any coding style guide errors.
