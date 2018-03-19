@@ -25,14 +25,14 @@ export default (state = initialState, action) => {
       searchAsyncInProgress: false,
       resetSearchTerm: false,
       searchTerm: action.payload.searchTerm,
-      offset: 26,
+      offset: action.payload.offset || 0,
       error: false,
     };
   case FETCH_GIFS_APPEND_SUCCESS:
     return {
       ...state,
       results: [...state.results, ...action.payload.results],
-      offset: state.offset + 25,
+      offset: action.payload.offset,
       searchAsyncInProgress: false,
       error: false,
     };

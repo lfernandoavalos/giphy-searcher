@@ -12,11 +12,12 @@ import {
   FETCH_GIFS_FAILURE,
 } from './search.types';
 
-const fetchSearchSuccess = (results, searchTerm) => ({
+const fetchSearchSuccess = (results, searchTerm, offset) => ({
   type: FETCH_GIFS_SUCCESS,
   payload: {
     results,
     searchTerm,
+    offset,
   },
 });
 
@@ -28,10 +29,11 @@ const loading = () => ({
   type: FETCH_GIFS_LOADING,
 });
 
-const fetchSearchAppendSuccess = results => ({
+const fetchSearchAppendSuccess = (results, offset) => ({
   type: FETCH_GIFS_APPEND_SUCCESS,
   payload: {
     results,
+    offset,
   },
 });
 
@@ -45,8 +47,9 @@ const fetchTrending = (offset: Number = 0) =>
     fetch: () => GiphyAPI.fetchTrending(offset),
     success: (results, context) => {
       context.dispatch(clearSearchTerm());
+
       if (offset) {
-        return fetchSearchAppendSuccess(results);
+        return fetchSearchAppendSuccess(results, offset);
       }
 
       return fetchSearchSuccess(results);
@@ -64,32 +67,38 @@ const searchGiphy = (searchTerm: String, offset: Number = 0) =>
         CacheStorage.setItem(searchTerm, undefined);
       }
 
-      if (!CacheStorage.hasItem[searchTerm]) {
+      if (!CacheStorage.hasItem(searchTerm)) {
         CacheStorage.setItem(searchTerm, {
           description: {
             caption: searchTerm,
             legend: `Seen: ${new Date()}`,
             leftIcon: 'search',
           },
+          offset: 0,
           results,
         });
       } else if (offset) {
         const cachedResults = CacheStorage.getItem(searchTerm);
-        cachedResults.results = [cachedResults.results, ...results];
+        CacheStorage.setItem(searchTerm, {
+          ...cachedResults,
+          results: [...cachedResults.results, ...results],
+          offset,
+        });
       }
 
       if (offset) {
-        return fetchSearchAppendSuccess(results);
+        return fetchSearchAppendSuccess(results, offset);
       }
 
       return fetchSearchSuccess(results, searchTerm);
     },
     loading: () => loading(),
+    error: () => fetchSearchFailure(),
   });
 
 const fetchFromCache = (searchTerm) => {
-  const { results } = CacheStorage.getItem(searchTerm);
-  return fetchSearchSuccess(results, searchTerm);
+  const { results, offset } = CacheStorage.getItem(searchTerm);
+  return fetchSearchSuccess(results, searchTerm, offset);
 };
 
 export {

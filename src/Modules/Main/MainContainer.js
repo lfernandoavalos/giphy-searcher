@@ -31,8 +31,7 @@ class MainContainer extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // Page reset
-    if (nextProps.offset === 25) {
+    if (!nextProps.offset && !nextProps.searchAsyncInProgress) {
       window.scrollTo(0, 0);
     }
     const cachedResults = [];
@@ -61,10 +60,11 @@ class MainContainer extends Component {
     const wrappedElement = document.getElementById('layout');
     if (this.isBottom(wrappedElement)
       && !this.props.searchAsyncInProgress) {
+      const offset = 25;
       if (!this.props.searchTerm) {
-        this.props.fetchTrending(this.props.offset);
+        this.props.fetchTrending(this.props.offset + offset);
       } else {
-        this.props.searchGiphy(this.props.searchTerm, this.props.offset);
+        this.props.searchGiphy(this.props.searchTerm, this.props.offset + offset);
       }
       document.removeEventListener('scroll', this.handleScroll);
     }

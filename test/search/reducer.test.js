@@ -27,7 +27,7 @@ describe('search reducer', () => {
     expect(reducer(initialState, action)).toEqual({
       ...initialState,
       results: TRENDING,
-      offset: 26,
+      offset: 0,
       searchAsyncInProgress: false,
       searchTerm: undefined,
     });
@@ -46,13 +46,14 @@ describe('search reducer', () => {
       type: types.FETCH_GIFS_APPEND_SUCCESS,
       payload: {
         results: [...TRENDING],
+        offset: 25,
       },
     };
 
     expect(reducer(state, action)).toEqual({
       ...initialState,
       results: [...TRENDING, ...TRENDING],
-      offset: 51,
+      offset: 25,
       searchAsyncInProgress: false,
       searchTerm: 'Searching',
     });

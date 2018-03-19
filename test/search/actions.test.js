@@ -73,6 +73,7 @@ describe('search async actions', () => {
       payload: {
         results: SEARCH_RESULTS,
         searchTerm: 'Searching',
+        offset: 0,
       },
     };
 
