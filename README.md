@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/lfernandoavalos/giphy-searcher.svg?branch=master)](https://travis-ci.org/lfernandoavalos/giphy-searcher)
+
+
 # Giphy Seacher
 
 ReactJS powered GIF Searcher using the [Giphy API](https://github.com/Giphy/GiphyAPI)
