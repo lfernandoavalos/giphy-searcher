@@ -92,7 +92,7 @@ class MainContainer extends Component {
                     alt="Funny error gif"
                     src="https://media1.giphy.com/media/l0HlToB2cTLfq9aJW/giphy.gif"
                   />
-                  <ContentCenter text="We've reached out to the dev how built this, there was an error." />
+                  <ContentCenter text="On Snap! There was an error. Our team has been alerted." />
                 </div> : null
               }
               { results }
